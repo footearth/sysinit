@@ -31,7 +31,7 @@
     - 阿里云盘
     - 百度网盘
     - 夸克网盘
-    
+
     - vivaldi
 
 - github
@@ -65,6 +65,11 @@
     - docker
     - podman-desktop
     - podman
+
+- WSA 安卓子系统
+    - https://store.rg-adguard.net
+    - https://apps.microsoft.com/store/detail/windows-subsystem-for-android%E2%84%A2-with-amazon-appstore/9P3395VX91NR
+    - ```Add-AppxPackage "D:\文件所在的路径\wsa.Msixbundle"```
 
 ## scoop
 
