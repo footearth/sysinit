@@ -3,7 +3,7 @@
 ```powershell
 >> docker pull manjarolinux/base
 >> docker run -ti --name manjaro manjarolinux/base /bin/bash
->> docker export 
+>> docker export -o ./Manjaro.tar manjarolinux/base
 >> wsl --import Manjaro ./ManjaroWSL2 ./Manjaro.tar
 ```
 
@@ -31,3 +31,26 @@ edit /etc/pacman.d/mirrorlist
     - https://mirrors.sjtug.sjtu.edu.cn/manjaro/stable/$repo/$arch
 - 浙江大学
     - https://mirrors.zju.edu.cn/manjaro/stable/$repo/$arch
+
+## systemd
+
+- 安装
+
+```sh
+>> echo -e "[boot]\nsystemd=true" | sudo tee -a /etc/wsl.conf
+```
+
+- 检查
+
+```sh
+>> ps --no-headers -o comm 1
+
+>> systemctl list-units --type=service
+>> systemctl list-unit-files --type=service --state=enabled
+```
+
+## XDG_RUNTIME_DIR
+
+```sh
+>> sudo chown -R $USER:$USER /run/user/$(id -u $USER)
+```
