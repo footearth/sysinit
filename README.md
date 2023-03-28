@@ -79,10 +79,14 @@
 >> $env:SCOOP='d:\DEV\Scoop'
 >> [environment]::setEnvironmentVariable('SCOOP',$env:SCOOP,'User')
 
->> iwr -useb https://gitee.com/glsnames/scoop-installer/raw/master/bin/install.ps1 | iex
-
 // https://gitee.com/glsnames/scoop-installer
->> scoop config SCOOP_REPO https://gitee.com/scoop-bucket/scoop
+// iwr -useb https://gitee.com/glsnames/scoop-installer/raw/master/bin/install.ps1 | iex
+
+// hub.fgit.ml | hub.nuaa.cf | hub.yzuu.cf | hub.njuu.cf | https://www.ooopn.com/tool/github/
+>> iwr -useb https://raw.staticdn.net/scoop/scoop-installer/raw/master/bin/install.ps1 | iex
+
+// scoop config SCOOP_REPO https://gitee.com/scoop-bucket/scoop
+>> scoop config SCOOP_REPO https://gitclone.com/github.com/ScoopInstaller/Scoop
 
 >> scoop bucket add extras https://gitee.com/scoop-bucket/extras.git
 >> scoop bucket add versions
