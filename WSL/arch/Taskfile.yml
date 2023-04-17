@@ -79,6 +79,7 @@ tasks:
   install-container:
     - paru -S --noconfirm
         docker podman
+        docker-compose podman-compose
     - sudo usermod -aG docker $USER
 
     - echo "$USER:100000:65536" |
@@ -96,6 +97,9 @@ tasks:
   after-container:
     - sudo systemctl enable docker
     - sudo systemctl enable podman
+
+    - sudo systemctl restart docker
+    - sudo systemctl restart podman
 
   all:
     cmds:
