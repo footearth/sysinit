@@ -1,7 +1,7 @@
 version: '3'
 
 vars:
-  task: $HOME/Task/task/task
+  task: $HOME/WorkSpace/sysinit/task/task
 
 tasks:
 
@@ -75,7 +75,28 @@ tasks:
       sed -e 's/^\s*//g' |
       tee $HOME/.profile
         > /dev/null
-        
+
+  install-container:
+    - paru -S --noconfirm
+        docker podman
+    - sudo usermod -aG docker $USER
+
+    - echo "$USER:100000:65536" |
+        sudo tee /etc/subuid
+    - echo "$USER:100000:65536" |
+        sudo tee /etc/subgid
+
+    - sudo chmod 4755 /usr/bin/newgidmap
+    - sudo chmod 4755 /usr/bin/newuidmap
+
+  config-systemd:
+    - echo -e "[boot]\nsystemd=true" |
+        sudo tee -a /etc/wsl.conf
+
+  after-container:
+    - sudo systemctl enable docker
+    - sudo systemctl enable podman
+
   all:
     cmds:
       - task: mirrors
@@ -93,3 +114,6 @@ tasks:
 
       - task: install-base
       - task: init-profile
+        
+      - task: install-container
+      - task: config-systemd
