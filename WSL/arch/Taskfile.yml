@@ -56,7 +56,8 @@ tasks:
   install-base:
     - paru -S --noconfirm
         axel aria2 neovim fish
-
+        go-task-bin
+        
   init-profile:
     - cat $HOME/.bashrc |
       sed -e '$a\\n
@@ -75,6 +76,14 @@ tasks:
       sed -e 's/^\s*//g' |
       tee $HOME/.profile
         > /dev/null
+
+  link-local:
+    - ln -s /usr/bin/nvim
+        $HOME/.local/vi
+    - ln -s /usr/bin/nvim
+        $HOME/.local/vim
+    - ln -s /usr/bin/go-task
+        $HOME/.local/task
 
   install-container:
     - paru -S --noconfirm
@@ -118,6 +127,7 @@ tasks:
 
       - task: install-base
       - task: init-profile
-        
+      - task: link-local
+
       - task: install-container
       - task: config-systemd
