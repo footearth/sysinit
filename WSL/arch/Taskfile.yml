@@ -131,3 +131,28 @@ tasks:
 
       - task: install-container
       - task: config-systemd
+
+  fix-paru:
+    cmds:
+      - task: install-paru
+      - task: upgrade-paru
+
+      - task: install-base
+      - task: init-profile
+      - task: link-local
+
+      - task: install-container
+      - task: config-systemd
+
+  fix-go-task:
+    cmds:
+      - task: install-base
+      - task: init-profile
+      - task: link-local
+
+      - task: install-container
+      - task: config-systemd
+
+  after:
+    cmds:
+      - task: after-container
