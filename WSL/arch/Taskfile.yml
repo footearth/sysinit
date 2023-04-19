@@ -134,8 +134,6 @@ tasks:
 
       - task: install-container
       - task: config-systemd
-        
-      - task: fix-xdg
 
   fix-paru:
     cmds:
@@ -149,8 +147,6 @@ tasks:
       - task: install-container
       - task: config-systemd
 
-      - task: fix-xdg
-
   fix-go-task:
     cmds:
       - task: install-base
@@ -160,8 +156,7 @@ tasks:
       - task: install-container
       - task: config-systemd
 
-      - task: fix-xdg
-
   after:
     cmds:
+      - task: fix-xdg
       - task: after-container
