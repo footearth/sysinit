@@ -103,6 +103,9 @@ tasks:
     - echo -e "[boot]\nsystemd=true" |
         sudo tee -a /etc/wsl.conf
 
+  fix-xdg:
+    - sudo chown -R $USER:$USER /run/user/$(id -u $USER)
+
   after-container:
     - sudo systemctl enable docker
     - sudo systemctl enable podman
@@ -131,6 +134,8 @@ tasks:
 
       - task: install-container
       - task: config-systemd
+        
+      - task: fix-xdg
 
   fix-paru:
     cmds:
@@ -144,6 +149,8 @@ tasks:
       - task: install-container
       - task: config-systemd
 
+      - task: fix-xdg
+
   fix-go-task:
     cmds:
       - task: install-base
@@ -152,6 +159,8 @@ tasks:
 
       - task: install-container
       - task: config-systemd
+
+      - task: fix-xdg
 
   after:
     cmds:
