@@ -13,16 +13,18 @@ tasks:
   mirrors:
     - pacman-mirrors -i -g
         -c China -m rank
-        
+
   install-pre:
     - pacman -Syyu
-    - pacman -S wget git
+    - pacman -S --noconfirm
+        wget git 
 
   normal-user:
     - useradd -m manjaro
     - passwd manjaro
     - echo "manjaro ALL=(ALL) ALL" > /etc/sudoers.d/manjaro
-      
+    - su - manjaro
+
   archlinuxcn:
     - sudo cat /etc/pacman.conf |
         sed -e '$a\\n
@@ -121,3 +123,56 @@ tasks:
 
     - sudo systemctl restart docker
     - sudo systemctl restart podman
+      
+  pre:
+    cmds:
+      - task: mirrors
+      - task: install-pre
+      - task: normal-user
+
+  all:
+    cmds:
+      - task: archlinuxcn
+      - task: upgrade-pacman
+
+      - task: upgrade-keyring
+      - task: upgrade-keyring
+
+      - task: install-yay
+      - task: upgrade-yay
+
+      - task: install-paru
+      - task: upgrade-paru
+
+      - task: install-base
+      - task: init-profile
+      - task: link-local
+
+      - task: install-container
+      - task: config-systemd
+
+  fix-paru:
+    cmds:
+      - task: install-paru
+      - task: upgrade-paru
+
+      - task: install-base
+      - task: init-profile
+      - task: link-local
+
+      - task: install-container
+      - task: config-systemd
+
+  fix-go-task:
+    cmds:
+      - task: install-base
+      - task: init-profile
+      - task: link-local
+
+      - task: install-container
+      - task: config-systemd
+
+  post:
+    cmds:
+      - task: fix-xdg
+      - task: after-container
