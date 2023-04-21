@@ -3,7 +3,7 @@
 ```powershell
 >> docker pull manjarolinux/base
 >> docker run -ti --name manjaro manjarolinux/base /bin/bash
->> docker export -o ./Manjaro.tar manjarolinux/base
+>> docker export -o ./Manjaro.tar manjaro 
 >> wsl --import Manjaro ./ManjaroWSL2 ./Manjaro.tar
 ```
 
