@@ -60,3 +60,12 @@ tasks:
     - mkdir -p ~/.config/fish
     - echo "alias gost 'docker run --rm gogost/gost'"
         >> ~/.config/fish/config.fish
+
+  all:
+    - task: update
+    - task: install-base
+    - task: init-profile
+    - task: install-container
+    - task: config-podman
+    - task: after-container
+    - task: init-gost
