@@ -1,0 +1,164 @@
+version: '3'
+
+vars:
+  task: $HOME/WorkSpace/sysinit/task/task
+
+tasks:
+
+  help: '{{.task}} --list-all'
+  default:
+    cmds:
+      - task: help
+
+  mirrors:
+    - sudo wget -O /etc/pacman.d/mirrorlist
+        https://www.archlinux.org/mirrorlist/?country=CN
+    - sudo sed -i -e 's/^#Server/Server/g'
+        /etc/pacman.d/mirrorlist
+
+  archlinuxcn:
+    - sudo cat /etc/pacman.conf |
+        sed -e '$a\\n
+          [archlinuxcn]\n
+          SigLevel = Optional TrustedOnly\n
+          \n
+          Server = http://mirrors.163.com/archlinux-cn/$arch
+        ' |
+        sed -e 's/^\s*//g' |
+        sudo tee /etc/pacman.conf.tmp
+          > /dev/null
+    - sudo mv /etc/pacman.conf.tmp
+        /etc/pacman.conf
+
+  upgrade-pacman:
+    - sudo pacman -Syyu --noconfirm
+
+  upgrade-keyring:
+    - sudo pacman -Sy --noconfirm
+        archlinuxcn-keyring
+    - sudo pacman -Su --noconfirm
+    - sudo pacman-key --init
+
+  install-yay:
+    - sudo pacman -S --noconfirm
+        yay
+
+  upgrade-yay:
+    - yay -Syyu --noconfirm
+
+  install-paru:
+    - yay -S --noconfirm
+        binutils
+    - yay -S --noconfirm
+        paru-bin
+
+  upgrade-paru:
+    - paru -Syyu --noconfirm
+
+  install-base:
+    - paru -S --noconfirm
+        axel aria2 neovim fish
+        go-task-bin
+        
+  init-profile:
+    - cat $HOME/.bashrc |
+      sed -e '$a\\n
+        source $HOME/.profile
+      ' |
+      sed -e 's/^\s*//g'
+      > $HOME/.bashrc.tmp
+    - mv $HOME/.bashrc.tmp
+        $HOME/.bashrc
+    - mkdir -p $HOME/.local/bin
+    - touch $HOME/.profile
+    - echo -e '
+        cd $HOME\n
+        export PATH=$PATH:$HOME/.local/bin
+      ' |
+      sed -e 's/^\s*//g' |
+      tee $HOME/.profile
+        > /dev/null
+
+  link-local:
+    - ln -s /usr/bin/nvim
+        $HOME/.local/bin/vi
+    - ln -s /usr/bin/nvim
+        $HOME/.local/bin/vim
+    - ln -s /usr/bin/go-task
+        $HOME/.local/bin/task
+
+  install-container:
+    - paru -S --noconfirm
+        docker podman
+        docker-compose podman-compose
+    - sudo usermod -aG docker $USER
+
+    - echo "$USER:100000:65536" |
+        sudo tee /etc/subuid
+    - echo "$USER:100000:65536" |
+        sudo tee /etc/subgid
+
+    - sudo chmod 4755 /usr/bin/newgidmap
+    - sudo chmod 4755 /usr/bin/newuidmap
+
+  config-systemd:
+    - echo -e "[boot]\nsystemd=true" |
+        sudo tee -a /etc/wsl.conf
+
+  fix-xdg:
+    - sudo chown -R $USER:$USER /run/user/$(id -u $USER)
+
+  after-container:
+    - sudo systemctl enable docker
+    - sudo systemctl enable podman
+
+    - sudo systemctl restart docker
+    - sudo systemctl restart podman
+
+  all:
+    cmds:
+      - task: mirrors
+      - task: archlinuxcn
+      - task: upgrade-pacman
+
+      - task: upgrade-keyring
+      - task: upgrade-keyring
+
+      - task: install-yay
+      - task: upgrade-yay
+
+      - task: install-paru
+      - task: upgrade-paru
+
+      - task: install-base
+      - task: init-profile
+      - task: link-local
+
+      - task: install-container
+      - task: config-systemd
+
+  fix-paru:
+    cmds:
+      - task: install-paru
+      - task: upgrade-paru
+
+      - task: install-base
+      - task: init-profile
+      - task: link-local
+
+      - task: install-container
+      - task: config-systemd
+
+  fix-go-task:
+    cmds:
+      - task: install-base
+      - task: init-profile
+      - task: link-local
+
+      - task: install-container
+      - task: config-systemd
+
+  post:
+    cmds:
+      - task: fix-xdg
+      - task: after-container
