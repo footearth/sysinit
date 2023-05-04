@@ -21,7 +21,7 @@ tasks:
   install-base:
     - sudo apt install -y
         fish neovim axel aria2
-        htop
+        htop telnet
 
   init-profile:
     - mkdir -p ~/.local/bin
