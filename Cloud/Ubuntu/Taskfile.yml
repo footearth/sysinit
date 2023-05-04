@@ -45,7 +45,7 @@ tasks:
   config-podman:
     - mkdir -p ~/.config/containers
     - echo "unqualified-search-registries = ['docker.io']"
-        >> ~/.local/containers/registries.conf
+        >> ~/.config/containers/registries.conf
 
   after-container:
     - sudo systemctl enable docker
@@ -57,5 +57,6 @@ tasks:
   init-gost:
     - echo "alias gost='docker run --rm gogost/gost'"
         >> ~/.bashrc
+    - mkdir -p ~/.config/fish
     - echo "alias gost 'docker run --rm gogost/gost'"
         >> ~/.config/fish/config.fish
