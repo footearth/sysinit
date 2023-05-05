@@ -59,7 +59,7 @@ tasks:
     - paru -S --noconfirm
         axel aria2 neovim fish
         go-task-bin
-        
+
   init-profile:
     - cat $HOME/.bashrc |
       sed -e '$a\\n

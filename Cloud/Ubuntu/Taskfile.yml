@@ -1,0 +1,71 @@
+version: '3'
+
+tasks:
+
+  help: 'task --list-all'
+  default:
+    cmds:
+      - task: help
+
+  refresh-snap:
+    - sudo snap refresh
+
+  install-task:
+    - sudo snap install
+        task --classic
+
+  update:
+    - sudo apt update
+    - sudo apt upgrade -y
+
+  install-base:
+    - sudo apt install -y
+        fish neovim axel aria2
+        htop telnet
+
+  init-profile:
+    - mkdir -p ~/.local/bin
+
+    - ln -s /usr/bin/nvim ~/.local/bin/vi
+    - ln -s /usr/bin/nvim ~/.local/bin/vim
+
+  install-container:
+    - sudo apt install -y
+        docker.io podman
+    - sudo usermod -aG docker $USER
+
+    - echo "$USER:100000:65536" |
+        sudo tee /etc/subuid
+    - echo "$USER:100000:65536" |
+        sudo tee /etc/subgid
+
+    - sudo chmod 4755 /usr/bin/newgidmap
+    - sudo chmod 4755 /usr/bin/newuidmap
+
+  config-podman:
+    - mkdir -p ~/.config/containers
+    - echo "unqualified-search-registries = ['docker.io']"
+        >> ~/.config/containers/registries.conf
+
+  after-container:
+    - sudo systemctl enable docker
+    - sudo systemctl enable podman
+
+    - sudo systemctl restart docker
+    - sudo systemctl restart podman
+
+  init-gost:
+    - echo "alias gost='docker run --rm gogost/gost'"
+        >> ~/.bashrc
+    - mkdir -p ~/.config/fish
+    - echo "alias gost 'docker run --rm gogost/gost'"
+        >> ~/.config/fish/config.fish
+
+  all:
+    - task: update
+    - task: install-base
+    - task: init-profile
+    - task: install-container
+    - task: config-podman
+    - task: after-container
+    - task: init-gost
