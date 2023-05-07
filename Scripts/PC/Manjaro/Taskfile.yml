@@ -1,0 +1,31 @@
+version: '3'
+
+vars:
+  task: $HOME/WorkSpace/sysinit/task/task
+
+includes:
+  manjaro: ../../distro/manjarl.yml
+
+tasks:
+
+  help: '{{.task}} --list-all'
+  default:
+    - task: help
+
+  unintall-pre:
+    cmds:
+      - sudo pacman -Rsn
+          firefox gedit hexchat
+
+  all:
+    - task: manjaaro:mirrors
+    - task: unintall-pre
+
+    - task: manjaaro:archlinuxcn
+    - task: manjaaro:upgrade-pacman
+    - task: manjaaro:upgrade-keyring
+    - task: manjaaro:install-yay
+    - task: manjaaro:upgrade-yay
+    - task: manjaaro:install-paru
+    - task: manjaaro:upgrade-paru
+    - task: manjaaro:install-base

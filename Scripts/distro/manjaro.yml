@@ -1,29 +1,10 @@
 version: '3'
 
-vars:
-  task: $HOME/WorkSpace/sysinit/task/task
-
 tasks:
 
-  help: '{{.task}} --list-all'
-  default:
-    cmds:
-      - task: help
-
   mirrors:
-    - pacman-mirrors -i -g
-        -c China -m rank
-
-  install-pre:
-    - pacman -Syyu
-    - pacman -S --noconfirm
-        wget git 
-
-  normal-user:
-    - useradd -m manjaro
-    - passwd manjaro
-    - echo "manjaro ALL=(ALL) ALL" > /etc/sudoers.d/manjaro
-    - su - manjaro
+    - '{{.sudo}} pacman-mirrors -i -g
+        -c China -m rank'
 
   archlinuxcn:
     - sudo cat /etc/pacman.conf |
@@ -109,70 +90,3 @@ tasks:
 
     - sudo chmod 4755 /usr/bin/newgidmap
     - sudo chmod 4755 /usr/bin/newuidmap
-
-  config-systemd:
-    - echo -e "[boot]\nsystemd=true" |
-        sudo tee -a /etc/wsl.conf
-
-  fix-xdg:
-    - sudo chown -R $USER:$USER /run/user/$(id -u $USER)
-
-  after-container:
-    - sudo systemctl enable docker
-    - sudo systemctl enable podman
-
-    - sudo systemctl restart docker
-    - sudo systemctl restart podman
-
-  pre:
-    cmds:
-      - task: mirrors
-      - task: install-pre
-      - task: normal-user
-
-  all:
-    cmds:
-      - task: archlinuxcn
-      - task: upgrade-pacman
-
-      - task: upgrade-keyring
-      - task: upgrade-keyring
-
-      - task: install-yay
-      - task: upgrade-yay
-
-      - task: install-paru
-      - task: upgrade-paru
-
-      - task: install-base
-      - task: init-profile
-      - task: link-local
-
-      - task: install-container
-      - task: config-systemd
-
-  fix-paru:
-    cmds:
-      - task: install-paru
-      - task: upgrade-paru
-
-      - task: install-base
-      - task: init-profile
-      - task: link-local
-
-      - task: install-container
-      - task: config-systemd
-
-  fix-go-task:
-    cmds:
-      - task: install-base
-      - task: init-profile
-      - task: link-local
-
-      - task: install-container
-      - task: config-systemd
-
-  post:
-    cmds:
-      - task: fix-xdg
-      - task: after-container
