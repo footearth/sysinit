@@ -88,6 +88,7 @@ tasks:
         > /dev/null
 
   link-local:
+    - mkdir -p $HOME/.local/bin
     - ln -s /usr/bin/nvim
         $HOME/.local/bin/vi
     - ln -s /usr/bin/nvim

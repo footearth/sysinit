@@ -4,7 +4,7 @@ vars:
   task: $HOME/WorkSpace/sysinit/task/task
 
 includes:
-  manjaro: ../../distro/manjarl.yml
+  manjaro: ../../distro/manjaro.yml
 
 tasks:
 
@@ -13,19 +13,40 @@ tasks:
     - task: help
 
   unintall-pre:
-    cmds:
-      - sudo pacman -Rsn
-          firefox gedit hexchat
+    - pacman -Rsn
+        firefox gedit hexchat
+
+  scale-hidpi:
+    - paru -S --noconfirm
+        mutter-x11-scaling
+    - gsettings set
+        org.gnome.mutter experimental-features
+        "['x11-randr-fractional-scaling']"
+    - xrandr --output LVDS-1 --scale 1.25x1.25
+
+  fix-paru:
+    - task: manjaro:install-paru
+    - task: manjaro:upgrade-paru
+    - task: manjaro:install-base
+    - task: manjaro:link-local
+    - task: scale-hidpi
+
+  fix-task:
+    - task: manjaro:install-base
+    - task: manjaro:link-local
+    - task: scale-hidpi
 
   all:
-    - task: manjaaro:mirrors
-    - task: unintall-pre
+    - sudo {{.task}} manjaro:mirrors
+    - sudo {{.task}} unintall-pre
 
-    - task: manjaaro:archlinuxcn
-    - task: manjaaro:upgrade-pacman
-    - task: manjaaro:upgrade-keyring
-    - task: manjaaro:install-yay
-    - task: manjaaro:upgrade-yay
-    - task: manjaaro:install-paru
-    - task: manjaaro:upgrade-paru
-    - task: manjaaro:install-base
+    - task: manjaro:archlinuxcn
+    - task: manjaro:upgrade-pacman
+    - task: manjaro:upgrade-keyring
+    - task: manjaro:install-yay
+    - task: manjaro:upgrade-yay
+    - task: manjaro:install-paru
+    - task: manjaro:upgrade-paru
+    - task: manjaro:install-base
+    - task: manjaro:link-local
+    - task: scale-hidpi
