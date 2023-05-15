@@ -8,15 +8,15 @@
 ```powershell
 >> Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
 
+>> $env:SCOOP='D:\DEV\Scoop'
+>> [environment]::setEnvironmentVariable('SCOOP',$env:SCOOP,'User')
+
 >> iwr -useb https://raw.kgithub.com/ScoopInstaller/Install/master/install.ps1 | iex
 ```
 
 ## 配置
 
 ```powershell
->> $env:SCOOP='D:\DEV\Scoop'
->> [environment]::setEnvironmentVariable('SCOOP',$env:SCOOP,'User')
-
 >> scoop config SCOOP_REPO https://kgithub.com/ScoopInstaller/Install.git
 
 >> scoop install 7zip git aria2
