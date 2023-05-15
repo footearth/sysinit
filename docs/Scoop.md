@@ -11,7 +11,8 @@
 >> $env:SCOOP='D:\DEV\Scoop'
 >> [environment]::setEnvironmentVariable('SCOOP',$env:SCOOP,'User')
 
->> iwr -useb https://raw.kgithub.com/ScoopInstaller/Install/master/install.ps1 | iex
+>> iwr -useb https://raw.kgithub.com/footearth/sysinit/master/Scripts/PC/Scoop/install.ps1 | iex
+
 ```
 ## 配置
 
