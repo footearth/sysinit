@@ -13,17 +13,12 @@
 
 >> iwr -useb https://raw.kgithub.com/ScoopInstaller/Install/master/install.ps1 | iex
 ```
-
 ## 配置
 
 ```powershell
 >> scoop config SCOOP_REPO https://kgithub.com/ScoopInstaller/Install.git
 
->> scoop install 7zip git aria2
-
->> scoop config aria2-split 5
->> scoop config aria2-max-connection-per-server 5
->> scoop config aria2-min-split-size 1M
+>> scoop install git
 
 >> scoop bucket rm main
 
@@ -31,6 +26,12 @@
 >> scoop bucket add versions https://mirrors.nju.edu.cn/git/scoop-versions.git/
 >> scoop bucket add extras https://mirrors.nju.edu.cn/git/scoop-extras.git/
 >> scoop bucket add nerd-fonts https://mirrors.nju.edu.cn/git/scoop-nerd-fonts.git/
+
+>> scoop install aria2
+
+>> scoop config aria2-split 5
+>> scoop config aria2-max-connection-per-server 5
+>> scoop config aria2-min-split-size 1M
 ```
 
 ## 迁移
@@ -87,4 +88,22 @@
 ```powershell
 >> scoop install DejaVuSansMono-NF-Mono DejaVuSansMono-NF
 >> scoop install Hack-NF-Mono Hack-NF
+```
+
+### podman mirror config
+
+```conf
+unqualified-search-registries=["docker.io"]
+
+[[registry]]
+prefix = "docker.io"
+location = "docker.io"
+
+[[registry.mirror]]
+location = "docker.mirrors.ustc.edu.cn"
+[[registry.mirror]]
+location = "hub-mirror.c.163.com"
+insecure = true
+[[registry.mirror]]
+location = "rigistry.docker-cn.com"
 ```
