@@ -17,7 +17,7 @@
 ## 配置
 
 ```powershell
->> scoop config SCOOP_REPO https://kgithub.com/ScoopInstaller/Install.git
+>> scoop config SCOOP_REPO https://kgithub.com/ScoopInstaller/Scoop.git
 
 >> scoop install git
 
