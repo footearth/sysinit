@@ -1,27 +1,27 @@
-theme·=·"snazzy"
+theme = "snazzy"
 
 [editor]
-mouse·=·false
-true-color·=·true
-color-modes·=·true
-cursorline·=·true
-cursorcolumn·=·true
+mouse = false
+true-color = true
+color-modes = true
+cursorline = true
+cursorcolumn = true
 
-#·[editor.whitespace]
-#·render·=·"all"
+# [editor.whitespace]
+# render = "all"
 [editor.whitespace.render]
-space·=·"all"
-tab·=·"all"
-newline·=·"none"
+space = "all"
+tab = "all"
+newline = "none"
 [editor.whitespace.characters]
-space·=·"·"
-nbsp·=·"⍽"
-tab·=·"→"
-newline·=·"⏎"
-tabpad·=·"·"
+space = "·"
+nbsp = "⍽"
+tab = "→"
+newline = "⏎"
+tabpad = " "
 
 [editor.indent-guides]
-render·=·true
-character·=·"╎"
-#·Some·characters·that·work·well:·"▏",·"┆",·"┊",·"⸽"
-skip-levels·=·1
+render = true
+character = "╎"
+# Some characters that work well: "▏", "┆", "┊", "⸽"
+skip-levels = 1
