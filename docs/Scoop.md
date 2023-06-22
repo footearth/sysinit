@@ -11,13 +11,15 @@
 >> $env:SCOOP='D:\DEV\Scoop'
 >> [environment]::setEnvironmentVariable('SCOOP',$env:SCOOP,'User')
 
->> iwr -useb https://raw.kgithub.com/footearth/sysinit/master/Scripts/PC/Scoop/install.ps1 | iex
+# >> iwr -useb https://raw.kgithub.com/footearth/sysinit/master/Scripts/PC/Scoop/install.ps1 | iex
+>> iwr -useb https://gitee.com/glsnames/scoop-installer/raw/master/bin/install.ps1 | iex
 
 ```
 ## 配置
 
 ```powershell
->> scoop config SCOOP_REPO https://kgithub.com/ScoopInstaller/Scoop.git
+# >> scoop config SCOOP_REPO https://kgithub.com/ScoopInstaller/Scoop.git
+>> scoop config SCOOP_REPO https://gitee.com/glsnames/scoop-installer
 
 >> scoop install git
 
