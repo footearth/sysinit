@@ -7,12 +7,16 @@ tasks:
         -c China -m rank'
 
   archlinuxcn:
+    # https://mirrors.ustc.edu.cn/archlinuxcn/$arch
+    # https://mirrors.bfsu.edu.cn/archlinuxcn/$arch
+    # https://mirrors.nju.edu.cn/archlinuxcn/$arch
+    # https://mirrors.tuna.tsinghua.edu.cn/archlinuxcn/$arch
     - sudo cat /etc/pacman.conf |
         sed -e '$a\\n
           [archlinuxcn]\n
           SigLevel = Optional TrustedOnly\n
           \n
-          Server = http://mirrors.163.com/archlinux-cn/$arch
+          Server = https://mirrors.tuna.tsinghua.edu.cn/archlinuxcn/$arch
         ' |
         sed -e 's/^\s*//g' |
         sudo tee /etc/pacman.conf.tmp
