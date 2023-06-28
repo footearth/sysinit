@@ -1,7 +1,7 @@
 version: '3'
 
 vars:
-  task: $HOME/WorkSpace/sysinit/task/task
+  task: $HOME/WorkSpace/Docker/sysinit/task/task
 
 includes:
   manjaro: ../../distro/manjaro.yml
