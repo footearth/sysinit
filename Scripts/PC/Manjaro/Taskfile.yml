@@ -18,7 +18,7 @@ tasks:
         wcl=$(pacman -Q | grep "^${pkg}" | wc -l)
         ; if [[ $wcl -eq 1 ]]
         ; then
-            pacman -Rsn $pkg
+            pacman -Rsn --noconfirm $pkg
         ; fi
       ; done
 
@@ -29,6 +29,15 @@ tasks:
         org.gnome.mutter experimental-features
         "['x11-randr-fractional-scaling']"
     - xrandr --output LVDS-1 --scale 1.25x1.25
+
+  fix-mutter:
+    - sudo pacman -Rdd
+        --noconfirm
+        gnome-control-center mutter
+    - sudo pacman -S
+        --as-deps
+        --noconfirm
+        budgie-control-center mutter43
 
   fix-paru:
     - task: manjaro:install-paru
@@ -47,6 +56,9 @@ tasks:
     - sudo {{.task}} uninstall-pre
 
     - task: manjaro:archlinuxcn
+
+    - task: fix-mutter
+
     - task: manjaro:upgrade-pacman
     - task: manjaro:upgrade-keyring
     - task: manjaro:install-yay
