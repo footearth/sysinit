@@ -21,18 +21,23 @@ tasks:
     # https://mirrors.bfsu.edu.cn/archlinuxcn/$arch
     # https://mirrors.nju.edu.cn/archlinuxcn/$arch
     # https://mirrors.tuna.tsinghua.edu.cn/archlinuxcn/$arch
-    - sudo cat /etc/pacman.conf |
-        sed -e '$a\\n
-          [archlinuxcn]\n
-          SigLevel = Optional TrustedOnly\n
-          \n
-          Server = https://mirrors.tuna.tsinghua.edu.cn/archlinuxcn/$arch
-        ' |
-        sed -e 's/^\s*//g' |
-        sudo tee /etc/pacman.conf.tmp
-          > /dev/null
-    - sudo mv /etc/pacman.conf.tmp
-        /etc/pacman.conf
+    - if ! grep -q 'archlinuxcn' /etc/pacman.conf
+      ; then
+          cat /etc/pacman.conf |
+            sed -e '$a\\n
+              [archlinuxcn]\n
+              SigLevel = Optional TrustedOnly\n
+              \n
+              Server = https://mirrors.tuna.tsinghua.edu.cn/archlinuxcn/$arch
+            ' |
+            sed -e 's/^\s*//g' |
+            sudo tee /etc/pacman.conf.tmp
+              > /dev/null
+        ; sudo mv /etc/pacman.conf.tmp
+            /etc/pacman.conf
+      ; else
+          echo false
+      ; fi
 
   upgrade-pacman:
     - sudo pacman -Syyu --noconfirm
