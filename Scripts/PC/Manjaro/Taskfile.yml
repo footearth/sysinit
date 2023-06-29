@@ -35,12 +35,12 @@ tasks:
     - task: manjaro:upgrade-paru
     - task: manjaro:install-base
     - task: manjaro:link-local
-    - task: scale-hidpi
+    # - task: scale-hidpi
 
   fix-task:
     - task: manjaro:install-base
     - task: manjaro:link-local
-    - task: scale-hidpi
+    # - task: scale-hidpi
 
   all:
     - sudo {{.task}} manjaro:mirrors
@@ -55,4 +55,4 @@ tasks:
     - task: manjaro:upgrade-paru
     - task: manjaro:install-base
     - task: manjaro:link-local
-    - task: scale-hidpi
+    # - task: scale-hidpi
