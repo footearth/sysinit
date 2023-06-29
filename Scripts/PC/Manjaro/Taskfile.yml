@@ -35,8 +35,8 @@ tasks:
         --noconfirm
         gnome-control-center mutter
     - sudo pacman -S
-        --as-deps
         --noconfirm
+        --as-deps
         budgie-control-center mutter43
 
   fix-paru:
