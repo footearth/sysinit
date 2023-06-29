@@ -12,9 +12,15 @@ tasks:
   default:
     - task: help
 
-  unintall-pre:
-    - pacman -Rsn
-        firefox gedit hexchat
+  uninstall-pre:
+    - for pkg in firefox gedit hexchat
+      ; do
+        wcl=$(pacman -Q | grep "^${pkg}" | wc -l)
+        ; if [[ $wcl -eq 1 ]]
+        ; then
+            pacman -Rsn $pkg
+        ; fi
+      ; done
 
   scale-hidpi:
     - paru -S --noconfirm
@@ -38,7 +44,7 @@ tasks:
 
   all:
     - sudo {{.task}} manjaro:mirrors
-    - sudo {{.task}} unintall-pre
+    - sudo {{.task}} uninstall-pre
 
     - task: manjaro:archlinuxcn
     - task: manjaro:upgrade-pacman
