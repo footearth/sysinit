@@ -31,6 +31,7 @@ tasks:
     - xrandr --output LVDS-1 --scale 1.25x1.25
 
   fix-mutter:
+    - sudo pacman -Syy
     - sudo pacman -Rdd
         --noconfirm
         gnome-control-center mutter
