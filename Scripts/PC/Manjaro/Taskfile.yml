@@ -13,7 +13,9 @@ tasks:
     - task: help
 
   uninstall-pre:
-    - for pkg in firefox gedit hexchat
+    - for pkg in firefox
+          gedit hexchat pidgin brasero onlyoffice-deskktopeditors
+          uget transmissions-gtk thunderbird lollypop
       ; do
         wcl=$(pacman -Q | grep "^${pkg}" | wc -l)
         ; if [[ $wcl -eq 1 ]]
