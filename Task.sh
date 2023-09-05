@@ -2,9 +2,11 @@
 
 # https://github.com/go-task/task/releases
 
-# wget -O task.tar.gz https://github.com/go-task/task/releases/download/v3.26.0/task_linux_amd64.tar.gz
-# wget -O task.tar.gz https://hub.fgit.ml/go-task/task/releases/download/v3.26.0/task_linux_amd64.tar.gz
-# wget -O task.tar.gz https://kgithub.com/go-task/task/releases/download/v3.26.0/task_linux_amd64.tar.gz
-wget -O task.tar.gz http://ghproxy.com/https://github.com/go-task/task/releases/download/v3.26.0/task_linux_amd64.tar.gz
+# https://github.com/go-task/task/releases
+# https://hub.fgit.ml
+# https://kgithub.com
+export TASK_VERSION=3.29.1 \
+&&  wget -O task.tar.gz \
+    http://ghproxy.com/https://github.com/go-task/task/releases/download/v${TASK_VERSION}/task_linux_amd64.tar.gz
 mkdir ./task
 tar -C ./task -xvf task.tar.gz

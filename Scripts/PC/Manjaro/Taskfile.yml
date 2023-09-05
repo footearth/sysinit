@@ -14,8 +14,8 @@ tasks:
 
   uninstall-pre:
     - for pkg in firefox
-          gedit hexchat pidgin brasero onlyoffice-deskktopeditors
-          uget transmissions-gtk thunderbird lollypop
+          gedit hexchat pidgin brasero onlyoffice-desktopeditors
+          uget transmission-gtk thunderbird lollypop
       ; do
         wcl=$(pacman -Q | grep "^${pkg}" | wc -l)
         ; if [[ $wcl -eq 1 ]]
@@ -42,6 +42,10 @@ tasks:
         --asdeps
         budgie-control-center mutter43
 
+  fix-webkit:
+    - mv /usr/bin/WebKitWebDriver
+        /usr/bin/WebKitWebDriver-5.0
+
   fix-paru:
     - task: manjaro:install-paru
     - task: manjaro:upgrade-paru
@@ -54,16 +58,53 @@ tasks:
     - task: manjaro:link-local
     # - task: scale-hidpi
 
+  install-gui:
+    - paru -S
+        --noconfirm
+        falkon microsoft-edge-dev-bin
+        helix code wezterm zellij
+        ibus ibus-rime manjaro-asian-input-support-ibus
+        starship
+        ulauncher
+    - paru -S
+        docker docker-compose
+        podman podman-compose
+    - sudo usermod -aG docker $USER
+    - sudo systemctl enable docker.service
+    - sudo systemctl restart docker.service
+    - paru -S
+        switchhosts-bin
+    - paru -S linux61-headers rtl8814au-dkms-git
+    # - paru -S
+    #     switchhosts-bin
+
+    # sudo pacman -R $(pacman -Qdtq)
+
+    # https://github.com/otsaloma/catapult
+    # - paru -S
+    #     python-setuptools 
+    #     catapult
+    # - make build
+    # - sudo make PREFIX=/usr/local install
+    # - sudo ln -s /usr/bin/catapult-start
+    #     /usr/local/bin/catapult-start
+
+    # - paru -S
+    #     python -launchpadlib cpu-checker
+
   all:
     - sudo {{.task}} manjaro:mirrors
     - sudo {{.task}} uninstall-pre
 
     - task: manjaro:archlinuxcn
 
-    - task: fix-mutter
+    # - task: fix-mutter
+    - task: fix-webkit
 
     - task: manjaro:upgrade-pacman
+    - pacman-mirrors
     - task: manjaro:upgrade-keyring
+    - gpgconf --kill all
     - task: manjaro:install-yay
     - task: manjaro:upgrade-yay
     - task: manjaro:install-paru
