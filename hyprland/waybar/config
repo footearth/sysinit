@@ -1,0 +1,129 @@
+{
+  "layer": "top",
+  "custom/launcher": {
+    "format": " ",
+    "on-click": "gamemoderun fuzzel"
+  },
+  "cpu": {
+    "interval": 15,
+    "format": " {}%",
+    "max-length": 10
+  },
+  "memory": {
+    "interval": 30,
+    "format": " {}%",
+    "max-length": 10
+  },
+  "temperature": {
+    "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
+    "critical-threshold": 90,
+    "format-critical": "{icon} {temperatureC}°C",
+    "format": "{icon} {temperatureC}°C",
+    "format-icons": [
+      "",
+      "",
+      ""
+    ]
+  },
+  "disk": {
+    "interval": 30,
+    "format": "🖴 {path} ({percentage_used}/{percentage_free})%",
+    "on-click": "baobab"
+  },
+  "network": {
+    "interface": "wlan0",
+    "format": "{ifname}",
+    "format-wifi": "{essid} ({signalStrength}%)  ",
+    "format-ethernet": "{ifname}  ",
+    "format-disconnected": " ",
+    "tooltip-format": "{ifname}",
+    "tooltip-format-wifi": "{essid} ({signalStrength}%)  ",
+    "tooltip-format-ethernet": "{ifname}  ",
+    "tooltip-format-disconnected": "Disconnected",
+    "max-length": 50,
+    "on-click": "iwgtk"
+  },
+  "tray": {
+    "icon-size": 21,
+    "spacing": 10
+  },
+  "backlight": {
+    "tooltip": false,
+    "format": " {}%",
+    "interval": 1,
+    "on-scroll-up": "light -A 5",
+    "on-scroll-down": "light -U 5"
+  },
+  "pulseaudio": {
+    "scroll-step": 5,
+    "format": "{volume}% {icon}",
+    "format-bluetooth": "{volume}% {icon} ",
+    "format-bluetooth-muted": "0%  {icon} ",
+    "format-muted": "",
+    "format-source": "",
+    "format-source-muted": "",
+    "format-icons": {
+      "headphone": "",
+      "hands-free": "",
+      "headset": "",
+      "phone": "",
+      "portable": "",
+      "car": "",
+      "hdmi": "",
+      "default": [
+        "",
+        "",
+        ""
+      ]
+    },
+    "ignored-sinks": [
+      "Easy Effects Sink"
+    ],
+    "on-click": "pamixer --toggle-mute",
+    "on-click-right": "pavucontrol"
+  },
+  "clock": {
+    "format": "{: %I:%M %p 🗓 %d/%m/%Y}",
+    "on-click": "gamemoderun wldash"
+  },
+  "custom/power": {
+    "format": " ",
+    "on-click": "gamemoderun waylogout --hide-cancel --screenshots --font=\"Baloo 2\" --fa-font=\"Font Awesome 6 Free\" --effect-blur=7x5 --indicator-thickness=20 --ring-color=888888aa --inside-color=88888866 --text-color=eaeaeaaa --line-color=00000000 --ring-selection-color=33cc33aa --inside-selection-color=33cc3366 --text-selection-color=eaeaeaaa --line-selection-color=00000000 --lock-command=\"echo lock\" --logout-command=\"echo logout\" --suspend-command=\"echo suspend\" --hibernate-command=\"echo hibernate\" --poweroff-command=\"echo poweroff\" --reboot-command=\"echo reboot\" --switch-user-command=\"echo switch\" --selection-label"
+  },
+  "custom/updates": {
+    "format": "{} Update(s)",
+    "exec": "checkupdates | wc -l",
+    "exec-if": "[[ $(checkupdates | wc -l) != 0 ]]",
+    "interval": 15,
+    "on-click": "wezterm -e paru -Syyu && notify-send 'The system has been updated' "
+  },
+  "custom/shade": {
+    "format": "{}",
+    "exec": " if [[ $(hyprshade ls | grep '^* blue-light-filter' | wc -l) == 1 ]] ; then echo ' ' ; else echo ' ' ; fi",
+    "on-click": " if [[ $(hyprshade ls | grep '^* blue-light-filter' | wc -l) == 1 ]] ; then hyprshade on vibrance ; else hyprshade on blue-light-filter ; fi",
+    "interval": 15
+  },
+  "modules-left": [
+    "custom/launcher",
+    "cpu",
+    "memory",
+    "temperature",
+    "disk"
+  ],
+  "hyprland/workspaces": {
+    "format": "{name}"
+  },
+  "modules-center": [
+    "hyprland/workspaces"
+  ],
+  "modules-right": [
+    "custom/updates",
+    "network",
+    "tray",
+    "backlight",
+    "custom/shade",
+    "clock",
+    "pulseaudio",
+    "custom/power"
+  ]
+}

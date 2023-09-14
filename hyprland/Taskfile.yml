@@ -1,0 +1,13 @@
+version: '3'
+
+tasks:
+
+  help: task --list-all
+  default:
+    - task: help
+
+  restore:
+    - cp -R ~/.config/hypr ./
+    - cp -R ~/.config/fuzzel ./
+    - cp -R ~/.config/waybar ./
+    - cp -R ~/.config/eww ./

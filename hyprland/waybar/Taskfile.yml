@@ -1,0 +1,19 @@
+version: '3'
+
+tasks:
+
+  help: task --list-all
+  default:
+    - task: help
+
+  load:
+    yq -Poy ./config
+
+  loadsave:
+    - task load > ./config.yml
+
+  build:
+    yq -o=json '.' ./config.yml
+
+  buildsave:
+    - task build > ./config
