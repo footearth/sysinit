@@ -43,10 +43,12 @@ tasks:
     - sudo pacman -Syyu --noconfirm
 
   upgrade-keyring:
+    - sudo pacman-key --init
+    # --allow-weak-key-signatures
+    - sudo pacman-key --lsign-key "farseerfc@archlinux.org"
     - sudo pacman -Sy --noconfirm
         archlinuxcn-keyring
     - sudo pacman -Su --noconfirm
-    - sudo pacman-key --init
 
   install-yay:
     - sudo pacman -S --noconfirm
