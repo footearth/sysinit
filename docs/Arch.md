@@ -3,17 +3,20 @@
 ### wsl.conf
 
 /etc/wsl.conf
+
 ```toml
 [user]
 default = footearth
 ```
 
 ~/.bashrc
+
 ```bash
 source ~/.profile
 ```
 
 ~/.profile
+
 ```bash
 cd ~
 ```
@@ -50,8 +53,9 @@ Server = http://mirrors.163.com/archlinux-cn/$arch
 ```
 
 ```sh
->> sudo pacman -Syy
+>> sudo pacman-key --init && sudo pacman-key --populate
 >> sudo pacman -Sy archlinux-keyring
+>> sudo pacman -Syy
 >> sudo pacman -Sy archlinuxcn-keyring
 >> sudo pacman -Su
 ```
