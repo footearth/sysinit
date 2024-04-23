@@ -1,5 +1,23 @@
 # Arch
 
+### wsl.conf
+
+/etc/wsl.conf
+```toml
+[user]
+default = footearth
+```
+
+~/.bashrc
+```bash
+source ~/.profile
+```
+
+~/.profile
+```bash
+cd ~
+```
+
 ### archlinux mirror
 
 ```sh
