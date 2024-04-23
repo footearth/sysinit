@@ -3,8 +3,10 @@
 ### archlinux mirror
 
 ```sh
->> sudo wget -O /etc/pacman.d/mirrorlist https://www.archlinux.org/mirrorlist/?country=CN
+>> curl -s https://archlinux.org/mirrorlist/?country=CN | sed 's/^#Server/Server/g' | sudo tee /etc/pacman.d/mirrorlist
 
+sudo wget -O /etc/pacman.d/mirrorlist https://www.archlinux.org/mirrorlist/?country=CN
+sudo curl -O /etc/pacman.d/mirrorlist https://www.archlinux.org/mirrorlist/?country=CN
 rankmirrors -n 6 mirrorlist.backup > mirrorlist
 reflector --verbose -l 200 -p http --sort rate --save /etc/pacman.d/mirrorlist
 ```
@@ -31,6 +33,7 @@ Server = http://mirrors.163.com/archlinux-cn/$arch
 
 ```sh
 >> sudo pacman -Syy
+>> sudo pacman -Sy archlinux-keyring
 >> sudo pacman -Sy archlinuxcn-keyring
 >> sudo pacman -Su
 ```
