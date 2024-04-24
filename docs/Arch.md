@@ -29,7 +29,8 @@ cd ~
 sudo wget -O /etc/pacman.d/mirrorlist https://www.archlinux.org/mirrorlist/?country=CN
 sudo curl -O /etc/pacman.d/mirrorlist https://www.archlinux.org/mirrorlist/?country=CN
 rankmirrors -n 6 mirrorlist.backup > mirrorlist
-reflector --verbose -l 200 -p http --sort rate --save /etc/pacman.d/mirrorlist
+sudo reflector --verbose -l 200 -p http --sort rate --save /etc/pacman.d/mirrorlist
+sudo reflector --country China --latest 20 --protocol https --sort rate --save /etc/pacman.d/mirrorlist
 ```
 ### archlinuxcn mirror
 
