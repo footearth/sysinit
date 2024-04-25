@@ -32,6 +32,12 @@ useradd
 >> visudo
 ```
 
+### docker daemon
+
+```bash
+>> sudo dockerd > /dev/null 2>&1 &
+```
+
 ### archlinux mirror
 
 ```sh
