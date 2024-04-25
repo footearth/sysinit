@@ -21,6 +21,17 @@ source ~/.profile
 cd ~
 ```
 
+useradd
+
+```bash
+>> useradd -m footearth
+>> passwd footearth
+>> groupadd sudo
+>> usermod -a -G sudo footearth
+>> ln -s /usr/bin/vim /usr/bin/vi
+>> visudo
+```
+
 ### archlinux mirror
 
 ```sh
