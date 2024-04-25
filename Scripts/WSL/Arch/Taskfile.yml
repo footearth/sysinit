@@ -24,7 +24,6 @@ tasks:
     # --allow-weak-key-signatures
     - sudo pacman -Sy --noconfirm
         archlinux-keyring
-    - sudo pacman -Su --noconfirm
 
   install-yay:
     - sudo pacman -S --noconfirm
