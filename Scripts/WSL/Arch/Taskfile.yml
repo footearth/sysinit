@@ -16,6 +16,27 @@ tasks:
     - sudo sed -i -e 's/^#Server/Server/g'
         /etc/pacman.d/mirrorlist
 
+  upgrade-pacman:
+    - sudo pacman -Syyu --noconfirm
+
+  upgrade-keyring:
+    - sudo pacman-key --init
+    # --allow-weak-key-signatures
+    - sudo pacman -Sy --noconfirm
+        archlinux-keyring
+    - sudo pacman -Su --noconfirm
+
+  install-yay:
+    - sudo pacman -S --noconfirm
+        yay
+
+  install-reflector:
+    - yay -S --noconfirm
+        reflector
+
+  update-mirrorlist:
+    - sudo reflector --verbose --country China -l 20 -p https --sort rate --save /etc/pacman.d/mirrorlist
+
   archlinuxcn:
     # https://mirrors.ustc.edu.cn/archlinuxcn/$arch
     # https://mirrors.bfsu.edu.cn/archlinuxcn/$arch
@@ -39,27 +60,10 @@ tasks:
           echo false
       ; fi
 
-  upgrade-pacman:
-    - sudo pacman -Syyu --noconfirm
-
-  upgrade-keyring:
-    - sudo pacman-key --init
-    # --allow-weak-key-signatures
+  upgrade-keyring-cn:
     - sudo pacman-key --lsign-key "farseerfc@archlinux.org"
     - sudo pacman -Sy --noconfirm
         archlinuxcn-keyring
-    - sudo pacman -Su --noconfirm
-
-  install-yay:
-    - sudo pacman -S --noconfirm
-        yay
-
-  install-reflector:
-    - yay -S --noconfirm
-        reflector
-
-  update-mirrorlist:
-    - sudo reflector --verbose --country China -l 20 -p https --sort rate --save /etc/pacman.d/mirrorlist
 
   upgrade-yay:
     - yay -Syyu --noconfirm
@@ -136,15 +140,14 @@ tasks:
   all:
     cmds:
       - task: mirrors
-      - task: archlinuxcn
       - task: upgrade-pacman
-
-      - task: upgrade-keyring
       - task: upgrade-keyring
 
       - task: install-yay
       - task: install-reflector
       - task: update-mirrorlist
+      - task: archlinuxcn
+      - task: upgrade-keyring
       - task: upgrade-yay
 
       - task: install-paru
