@@ -147,7 +147,7 @@ tasks:
       - task: install-reflector
       - task: update-mirrorlist
       - task: archlinuxcn
-      - task: upgrade-keyring
+      - task: upgrade-keyring-cn
       - task: upgrade-yay
 
       - task: install-paru
@@ -165,15 +165,6 @@ tasks:
       - task: install-paru
       - task: upgrade-paru
 
-      - task: install-base
-      - task: init-profile
-      - task: link-local
-
-      - task: install-container
-      - task: config-systemd
-
-  fix-go-task:
-    cmds:
       - task: install-base
       - task: init-profile
       - task: link-local
