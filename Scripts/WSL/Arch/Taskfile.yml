@@ -159,7 +159,6 @@ tasks:
       - task: link-local
 
       - task: install-container
-      - task: config-systemd
 
   fix-paru:
     cmds:
@@ -171,7 +170,6 @@ tasks:
       - task: link-local
 
       - task: install-container
-      - task: config-systemd
 
   post:
     cmds:
