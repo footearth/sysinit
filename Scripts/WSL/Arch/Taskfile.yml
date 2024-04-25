@@ -95,6 +95,7 @@ tasks:
     - echo -e '
         cd $HOME\n
         export PATH=$PATH:$HOME/.local/bin
+        export PODMAN_IGNORE_CGROUPSV1_WARNING=''
       ' |
       sed -e 's/^\s*//g' |
       tee $HOME/.profile
