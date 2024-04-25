@@ -54,6 +54,13 @@ tasks:
     - sudo pacman -S --noconfirm
         yay
 
+  install-reflector:
+    - yay -S --noconfirm
+        reflector
+
+  update-mirrorlist:
+    - sudo reflector --verbose --country China -l 20 -p https --sort rate --save /etc/pacman.d/mirrorlist
+
   upgrade-yay:
     - yay -Syyu --noconfirm
 
@@ -61,7 +68,7 @@ tasks:
     - yay -S --noconfirm
         binutils
     - yay -S --noconfirm
-        paru-bin
+        paru
 
   upgrade-paru:
     - paru -Syyu --noconfirm
@@ -69,7 +76,7 @@ tasks:
   install-base:
     - paru -S --noconfirm
         axel aria2 neovim fish
-        go-task-bin
+        go-task
 
   init-profile:
     - cat $HOME/.bashrc |
@@ -136,6 +143,8 @@ tasks:
       - task: upgrade-keyring
 
       - task: install-yay
+      - task: install-reflector
+      - task: update-mirrorlist
       - task: upgrade-yay
 
       - task: install-paru
