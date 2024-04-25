@@ -140,12 +140,12 @@ tasks:
   all:
     cmds:
       - task: mirrors
-      - task: upgrade-pacman
-      - task: upgrade-keyring
 
+      - task: upgrade-keyring
       - task: install-yay
       - task: install-reflector
       - task: update-mirrorlist
+      - task: upgrade-pacman
       - task: archlinuxcn
       - task: upgrade-keyring-cn
       - task: upgrade-yay
