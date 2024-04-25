@@ -26,7 +26,7 @@ tasks:
         archlinux-keyring
 
   install-yay:
-    - sudo pacman -S --noconfirm
+    - sudo pacman -Sy --noconfirm
         yay
 
   install-reflector:
@@ -141,12 +141,13 @@ tasks:
       - task: mirrors
 
       - task: upgrade-keyring
+      - task: archlinuxcn
+      - task: upgrade-keyring-cn
+
       - task: install-yay
       - task: install-reflector
       - task: update-mirrorlist
       - task: upgrade-pacman
-      - task: archlinuxcn
-      - task: upgrade-keyring-cn
       - task: upgrade-yay
 
       - task: install-paru
