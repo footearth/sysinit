@@ -80,6 +80,7 @@
 - starship
 - neovim
 - nu
+- -- electerm
 - -- xpipe
 
 - curl
@@ -94,10 +95,11 @@
 - -- win store -- Xtreme Download Manager
 
 - vscode
-- -- electerm
-- wsl2-distro-manager
+- zed-nightly
 
 - -- dark
+- wsl2-distro-manager
+- -- win store -- WSL Toolbox Beta
 - docker
 - docker-compose
 - podman
@@ -105,8 +107,10 @@
 - containerd
 - nerdctl
 - lazydocker
-- kind
+- -- kind
 - -- win store -- container desktop
+
+- task
 
 - DejaVuSansMono-NF-Mono
 - DejaVuSansMono-NF
