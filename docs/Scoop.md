@@ -2,8 +2,11 @@
 
 ## 安装
 
-- https://raw.fgit.ml/ScoopInstaller/Install/master/install.ps1
-- https://raw.kgithub.com/ScoopInstaller/Install/master/install.ps1
+- https://github.com/scoopinstaller/install/blob/master/install.ps1
+- https://raw.githubusercontent.com/scoopinstaller/install/refs/heads/master/install.ps1
+
+- https://gh-proxy.com/https://github.com/scoopinstaller/install/blob/master/install.ps1
+- https://gh-proxy.com/https://raw.githubusercontent.com/scoopinstaller/install/refs/heads/master/install.ps1
 
 ```powershell
 >> Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
@@ -11,15 +14,18 @@
 >> $env:SCOOP='D:\DEV\Scoop'
 >> [environment]::setEnvironmentVariable('SCOOP',$env:SCOOP,'User')
 
-# >> iwr -useb https://raw.kgithub.com/footearth/sysinit/master/Scripts/PC/Scoop/install.ps1 | iex
->> iwr -useb https://gitee.com/glsnames/scoop-installer/raw/master/bin/install.ps1 | iex
+# https://github.com/ScoopInstaller/Scoop/blob/master/bin/install.ps1
+# https://raw.githubusercontent.com/ScoopInstaller/Scoop/refs/heads/master/bin/install.ps1
+
+# >> iwr -useb https://raw.githubusercontent.com/ScoopInstaller/Scoop/refs/heads/master/bin/install.ps1 | iex
+>> iwr -useb https://gh-proxy.com/https://raw.githubusercontent.com/scoopinstaller/install/master/install.ps1 | iex
 
 ```
 ## 配置
 
 ```powershell
-# >> scoop config SCOOP_REPO https://kgithub.com/ScoopInstaller/Scoop.git
->> scoop config SCOOP_REPO https://gitee.com/glsnames/scoop-installer
+# >> scoop config SCOOP_REPO https://github.com/ScoopInstaller/Scoop.git
+>> scoop config SCOOP_REPO https://gh-proxy.com/https://github.com/ScoopInstaller/Scoop.git
 
 >> scoop install git
 
@@ -51,6 +57,12 @@
 >> scoop reset *
 ```
 
+## 清理
+
+```powershell
+>> scoop cleanup -a; scoop cache rm -a
+```
+
 ## 软件列表
 
 - 7zip
@@ -59,34 +71,50 @@
 
 - busybox
 - sudo
-- telnet
 
+- telnet
+- proxifier
+
+- -- web donwload -- wave terminal
 - wezterm
 - starship
 - neovim
 - nu
+- -- xpipe
 
 - curl
-- trzsz
+- -- trzsz
+- jq
+- bat
 
-- peazip
+- -- nanazip
+- -- -- peazip
 - freedownloadmanager
+- abdownloadmanager
+- -- win store -- Xtreme Download Manager
 
 - vscode
-- electerm
+- -- electerm
 - wsl2-distro-manager
 
-- dark
+- -- dark
 - docker
 - docker-compose
 - podman
 - podman-desktop
+- containerd
+- nerdctl
+- lazydocker
 - kind
+- -- win store -- container desktop
 
 - DejaVuSansMono-NF-Mono
 - DejaVuSansMono-NF
 - Hack-NF-Mono
 - Hack-NF
+
+- xplorer
+- -- space drive
 
 ```powershell
 >> scoop install DejaVuSansMono-NF-Mono DejaVuSansMono-NF
